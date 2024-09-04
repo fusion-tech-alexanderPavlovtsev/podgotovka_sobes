@@ -1,11 +1,15 @@
 import { Wrapper } from "./components/wrapper";
+import { RootStoreContext } from "./root-store-context";
+import RootStore from "./store/root-store";
 
 function App() {
   // return <Counter />;
   return (
-    <div className="App">
-      <Wrapper />
-    </div>
+    <RootStoreContext.Provider value={new RootStore()}>
+      <div className="App">
+        <Wrapper />
+      </div>
+    </RootStoreContext.Provider>
   );
 }
 

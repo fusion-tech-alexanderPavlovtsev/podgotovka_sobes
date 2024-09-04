@@ -3,6 +3,7 @@ import CounterStore from "../../store/counter-store";
 import postsStore from "../../store/posts-store";
 import { useEffect } from "react";
 import { spy } from "mobx";
+import { useStores } from "../../root-store-context";
 
 const counter1 = new CounterStore();
 const counter2 = new CounterStore();
@@ -40,8 +41,35 @@ spy((ev) => {
 //   return <>{posts?.value[0].body}</>;
 // });
 
+// export const Wrapper = observer(() => {
+//   const { getPostsAction, posts, isLoading } = postsStore;
+
+//   useEffect(() => {
+//     getPostsAction();
+//   }, []);
+
+//   if (!posts) {
+//     return null;
+//   }
+
+//   return posts.case({
+//     pending: () => <div>Loading...</div>,
+//     rejected: () => <div>Error</div>,
+//     fulfilled: (values) => (
+//       //   <ul>
+//       //     {values.map((todo, i) => {
+//       //       return <li key={i}>{todo.title}</li>;
+//       //     })}
+//       //   </ul>
+//       <div>{values[0].body}</div>
+//     ),
+//   });
+// });
+
 export const Wrapper = observer(() => {
-  const { getPostsAction, posts, isLoading } = postsStore;
+  const {
+    post: { getPostsAction, posts },
+  } = useStores();
 
   useEffect(() => {
     getPostsAction();
